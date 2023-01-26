@@ -13,7 +13,14 @@
     <PackageProjectUrl>https://github.com/workwhileweb/TTT.Ocr</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/workwhileweb/TTT.Ocr</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>ttt.png</PackageIcon>
+    <ApplicationIcon>ttt.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="ttt.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\README.md">
@@ -25,6 +32,17 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.1" />
     <PackageReference Include="TTT.Tesseract" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ttt.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="ttt.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
