@@ -32,10 +32,24 @@ public static class Helper
         return await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
     }
 
+    public static OcrEngine CreateEngine(string language)
+    {
+        //không hỗ trợ ngôn ngữ vn
+        //admin : Get-WindowsCapability -Online | Where-Object { $_.Name -Like 'Language.OCR*' }
+        //
+        //var languages = OcrEngine.AvailableRecognizerLanguages;
+        return OcrEngine.TryCreateFromLanguage(new Language(language));
+    }
+
     public static async Task<Page> Parse(this Bitmap bitmap)
     {
+        return await Parse(bitmap, Engine);
+    }
+
+    public static async Task<Page> Parse(this Bitmap bitmap, OcrEngine engine)
+    {
         using var softwareBitmap = await BitmapConvertAsync(bitmap);
-        var ocrResult = await Engine.RecognizeAsync(softwareBitmap);
+        var ocrResult = await engine.RecognizeAsync(softwareBitmap);
         var lines = ocrResult.Lines.Select(ln => ln.ToLine()).ToList();
         var rect = lines.Select(line => line.Rectangle).RectanglesUnion();
         var para = new Paragraph(lines, rect);
